@@ -47,7 +47,8 @@ UserRouter.post("/login", async (req, res) => {
         token: token,
         userId: coustomer._id,
         name:coustomer.name,
-        cart:coustomer.cart
+        cart:coustomer.cart,
+        role:coustomer.role
       });
     } else {
       return res.send("Invalid Credentials");
