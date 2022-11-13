@@ -42,7 +42,7 @@ ProductRouter.get("/:_id/one", Authentication, async (req, res) => {
   res.send({ msg: "Product", product: userproducts });
 });
 
-ProductRouter.get("/", Authentication, async (req, res) => {
+ProductRouter.get("/",  async (req, res) => {
 
   const Allproducts = await ProductModel.find();
   res.send({ msg: "All Produucts", products: Allproducts });
