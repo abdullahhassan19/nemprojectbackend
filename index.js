@@ -2,13 +2,16 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 const { connection } = require("./Config/db");
-const { AmazonRouter } = require("./Routers/AmazonRoutes");
-const {ProductRouter} = require("./Routers/AmazonProductsRouter")
+// const { CoustomerModel } = require("./Routers/CoustomerModel");
+// const {ProductRouter} = require("./Routers/ProductRouter")
+const {UserRouter}=require("./Routers/UserRouter")
+const {ProductRouter}=require("./Routers/ProductRouter")
+
 const cors = require("cors");
 const PORT = process.env.PORT || 8080;
 app.use(express.json());
 app.use(cors())
-app.use("/", AmazonRouter);
+app.use("/", UserRouter);
 app.use("/", ProductRouter);
 app.get("/", (req, res) => {
   req.send("HomePage");

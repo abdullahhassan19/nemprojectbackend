@@ -1,19 +1,20 @@
 const { Router } = require("express");
 const jwt = require("jsonwebtoken");
-const { CoustomerModel } = require("../Models/Coustomer.Model");
+const { UserModel } = require("../Models/User.Model");
 const bcrypt = require("bcrypt");
-const AmazonRouter = Router();
-AmazonRouter.post("/signup", (req, res) => {
-  const { name, email, password } = req.body;
+const UserRouter = Router();
+UserRouter.post("/signup", (req, res) => {
+  const { name, email, password, role } = req.body;
 
   bcrypt.hash(password, 5, async function (err, hashedpassword) {
     if (err) {
       res.send({ msg: "Something went Wronge" });
     }
-    const newcoustomer = new CoustomerModel({
+    const newcoustomer = new UserModel({
       name,
       email,
       password: hashedpassword,
+      role,
     });
     console.log(newcoustomer);
     try {
@@ -25,9 +26,9 @@ AmazonRouter.post("/signup", (req, res) => {
   });
 });
 
-AmazonRouter.post("/login", async (req, res) => {
+UserRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
-  const coustomer = await CoustomerModel.findOne({ email });
+  const coustomer = await UserModel.findOne({ email });
   if (!coustomer) {
     return res.send({ msg: "Invalid Credentials" });
   }
@@ -45,6 +46,8 @@ AmazonRouter.post("/login", async (req, res) => {
         messege: "Login Sucessful",
         token: token,
         userId: coustomer._id,
+        name:coustomer.name,
+        cart:coustomer.cart
       });
     } else {
       return res.send("Invalid Credentials");
@@ -52,4 +55,11 @@ AmazonRouter.post("/login", async (req, res) => {
   });
 });
 
-module.exports = { AmazonRouter };
+UserRouter.get("/:userId/getprofile", async (req, res) => {
+  // const { email, password } = req.body;
+  const coustomer = await UserModel.findOne({ userId });
+  res.send({"msg":"profile", coustomer});
+  
+});
+
+module.exports = { UserRouter };

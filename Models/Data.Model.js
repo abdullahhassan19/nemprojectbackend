@@ -1,12 +1,20 @@
 const mongoose = require("mongoose");
 
-const DataSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  price: { type: Number, required: true },
-  imageurl: { type: String },
-  userId: { type: String, required: true },
+const productSchema = mongoose.Schema({
+  productName: String,
+  price: Number,
+  strikedPrice: Number,
+  imageUrl: String,
+  prodHighlights: String,
+  longDesc: String,
+  shortDesc: String,
+  ratings: Number,
+  numberOfRatings: String,
+  discount: Number,
+  brand: String,
+  userId:String
 });
 
-const DataModel = mongoose.model("AmazonData", DataSchema);
+const ProductModel = mongoose.model("pharmaproducts", productSchema);
 
-module.exports = { DataModel };
+module.exports = {ProductModel};
