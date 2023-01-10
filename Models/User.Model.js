@@ -8,7 +8,7 @@ const UserSchema = Schema({
   role: { type: String },
   token: { type: String },
   cart: { type: Array, default: [] },
-  // userId: { type: String },
+  userId: { type: String },
 });
 
 const UserModel = model("user", UserSchema);
