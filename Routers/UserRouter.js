@@ -43,7 +43,7 @@ UserRouter.post("/login", async (req, res) => {
         process.env.SECRETKEY
       );
       return res.send({
-        messege: "Login Sucessful",
+        msg: "Login Sucessful",
         token: token,
         userId: coustomer._id,
         name:coustomer.name,
@@ -51,7 +51,7 @@ UserRouter.post("/login", async (req, res) => {
         role:coustomer.role
       });
     } else {
-      return res.send("Invalid Credentials");
+      return res.send({msg:"Invalid Credentials"});
     }
   });
 });
