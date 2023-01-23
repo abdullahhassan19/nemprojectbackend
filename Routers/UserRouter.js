@@ -13,7 +13,7 @@ UserRouter.post("/signup", (req, res) => {
     const newcoustomer = new UserModel({
       name,
       email,
-      // password: hashedpassword,
+      password: hashedpassword,
       role,
     });
     console.log(newcoustomer);
